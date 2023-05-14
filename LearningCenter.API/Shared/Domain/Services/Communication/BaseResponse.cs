@@ -10,7 +10,7 @@ public abstract class BaseResponse<T>
     }
 
     protected BaseResponse(T resource)
-    {
+    { 
         Success = true;
         Message = string.Empty; 
         Resource = resource;
