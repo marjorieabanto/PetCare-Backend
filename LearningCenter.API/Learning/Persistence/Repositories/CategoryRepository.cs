@@ -1,9 +1,9 @@
 using LearningCenter.API.Learning.Domain.Models;
 using LearningCenter.API.Learning.Domain.Repositories;
-using LearningCenter.API.Learning.Persistence.Contexts;
+using LearningCenter.API.Shared.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace LearningCenter.API.Learning.Persistence.Repositories;
+namespace LearningCenter.API.Shared.Persistence.Repositories;
 
 public class CategoryRepository : BaseRepository, ICategoryRepository
 {
