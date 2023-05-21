@@ -1,6 +1,7 @@
 ﻿using LearningCenter.API.Learning.Domain.Models;
 using LearningCenter.API.Learning.Domain.Repositories;
 using LearningCenter.API.Shared.Persistence.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace LearningCenter.API.Shared.Persistence.Repositories;
 
@@ -10,38 +11,48 @@ public class TutorialRepository : BaseRepository, ITutorialRepository
     {
     }
 
-    public Task<IEnumerable<Tutorial>> ListAsync()
+    public async Task<IEnumerable<Tutorial>> ListAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Tutorials
+            .Include(p => p.Category)
+            .ToListAsync();
     }
 
-    public Task AddAsync(Tutorial tutorial)
+    public async Task AddAsync(Tutorial tutorial)
     {
-        throw new NotImplementedException();
+        await _context.Tutorials.AddAsync(tutorial);
     }
 
-    public Task<Tutorial> FindByIdAsync(int tutorialId)
+    public async Task<Tutorial> FindByIdAsync(int tutorialId)
     {
-        throw new NotImplementedException();
+        return await _context.Tutorials
+            .Include(p => p.Category)
+            .FirstOrDefaultAsync(p => p.Id == tutorialId);
+        
     }
 
-    public Task<Tutorial> FindByTitleAsync(string title)
+    public async Task<Tutorial> FindByTitleAsync(string title)
     {
-        throw new NotImplementedException();
+        return await _context.Tutorials
+            .Include(p => p.Category)
+            .FirstOrDefaultAsync(p => p.Title == title);
     }
 
-    public Task<IEnumerable<Tutorial>> FindByCategoryIdAsync(int categoryId)
+    public async Task<IEnumerable<Tutorial>> FindByCategoryIdAsync(int categoryId)
     {
-        throw new NotImplementedException();
+        return await _context.Tutorials
+            .Where(p => p.CategoryId == categoryId)
+            .Include(p => p.Category)
+            .ToListAsync();
     }
 
     public void Update(Tutorial tutorial)
     {
-        throw new NotImplementedException();
+        _context.Tutorials.Update(tutorial);
     }
 
     public void Remove(Tutorial tutorial)
     {
-        throw new NotImplementedException();
+        _context.Tutorials.Remove(tutorial);
     }
 }
