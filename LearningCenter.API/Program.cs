@@ -1,6 +1,8 @@
 using LearningCenter.API.Learning.Domain.Repositories;
 using LearningCenter.API.Learning.Domain.Services;
 using LearningCenter.API.Learning.Services;
+using LearningCenter.API.Security.Authorization.Middleware;
+using LearningCenter.API.Security.Authorization.Settings;
 using LearningCenter.API.Security.Domain.Repositories;
 using LearningCenter.API.Security.Domain.Services;
 using LearningCenter.API.Security.Persistence.Repositories;
@@ -10,6 +12,9 @@ using LearningCenter.API.Shared.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add CORS
+builder.Services.AddCors();
 
 // Add services to the container.
 
@@ -34,6 +39,9 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 // Shared Injection Configuration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// AppSettings Configuration
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 // Dependency Injection Configuration
 
@@ -70,6 +78,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+// Configure CORS 
+
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
+// Configure Error Handler Middleware
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
+
+// Configure JWT Handling
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.UseHttpsRedirection();
 
