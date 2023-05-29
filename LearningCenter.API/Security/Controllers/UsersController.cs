@@ -3,7 +3,7 @@ using LearningCenter.API.Security.Domain.Models;
 using LearningCenter.API.Security.Domain.Services;
 using LearningCenter.API.Security.Domain.Services.Communication;
 using LearningCenter.API.Security.Resources;
-using Microsoft.AspNetCore.Authorization;
+using LearningCenter.API.Security.Authorization.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearningCenter.API.Security.Controllers;
