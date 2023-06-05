@@ -14,7 +14,7 @@ public class TutorialRepository : BaseRepository, ITutorialRepository
     public async Task<IEnumerable<Tutorial>> ListAsync()
     {
         return await _context.Tutorials
-            .Include(p => p.Category)
+            .Include(p => p.User)
             .ToListAsync();
     }
 
@@ -26,23 +26,23 @@ public class TutorialRepository : BaseRepository, ITutorialRepository
     public async Task<Tutorial> FindByIdAsync(int tutorialId)
     {
         return await _context.Tutorials
-            .Include(p => p.Category)
+            .Include(p => p.User)
             .FirstOrDefaultAsync(p => p.Id == tutorialId);
         
     }
 
-    public async Task<Tutorial> FindByTitleAsync(string title)
-    {
-        return await _context.Tutorials
-            .Include(p => p.Category)
-            .FirstOrDefaultAsync(p => p.Title == title);
-    }
+    // public async Task<Tutorial> FindByTitleAsync(string title)
+    // {
+    //     return await _context.Tutorials
+    //         .Include(p => p.Category)
+    //         .FirstOrDefaultAsync(p => p.Title == title);
+    // }
 
     public async Task<IEnumerable<Tutorial>> FindByCategoryIdAsync(int categoryId)
     {
         return await _context.Tutorials
-            .Where(p => p.CategoryId == categoryId)
-            .Include(p => p.Category)
+            .Where(p => p.UserId == categoryId)
+            .Include(p => p.User)
             .ToListAsync();
     }
 

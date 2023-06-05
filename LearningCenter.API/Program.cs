@@ -1,5 +1,6 @@
 using LearningCenter.API.Learning.Domain.Repositories;
 using LearningCenter.API.Learning.Domain.Services;
+using LearningCenter.API.Learning.Persistence.Repositories;
 using LearningCenter.API.Learning.Services;
 using LearningCenter.API.Security.Authorization.Handlers.Implementations;
 using LearningCenter.API.Security.Authorization.Handlers.Interfaces;
@@ -91,6 +92,8 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITutorialRepository, TutorialRepository>();
 builder.Services.AddScoped<ITutorialService, TutorialService>();
+builder.Services.AddScoped<IPetRepository, PetRepository>();
+builder.Services.AddScoped<IPetService, PetService>();
 
 // Security Injection Configuration
 builder.Services.AddScoped<IJwtHandler, JwtHandler>();

@@ -1,5 +1,6 @@
 using LearningCenter.API.Learning.Domain.Models;
 using LearningCenter.API.Learning.Domain.Repositories;
+using LearningCenter.API.Security.Domain.Models;
 using LearningCenter.API.Shared.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,9 +22,9 @@ public class CategoryRepository : BaseRepository, ICategoryRepository
         await _context.Categories.AddAsync(category);
     }
 
-    public async Task<Category> FindByIdAsync(int id)
+    public async Task<User> FindByIdAsync(int id)
     {
-        return await _context.Categories.FindAsync(id);
+        return await _context.Users.FindAsync(id);
     }
 
     public void Update(Category category)

@@ -48,35 +48,35 @@ public class TutorialsController : ControllerBase
         return Ok(tutorialResource);
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(int id, [FromBody] SaveTutorialResource resource)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState.GetErrorMessages());
+    // [HttpPut("{id}")]
+    // public async Task<IActionResult> PutAsync(int id, [FromBody] SaveTutorialResource resource)
+    // {
+    //     if (!ModelState.IsValid)
+    //         return BadRequest(ModelState.GetErrorMessages());
 
-        var tutorial = _mapper.Map<SaveTutorialResource, Tutorial>(resource);
+    //     var tutorial = _mapper.Map<SaveTutorialResource, Tutorial>(resource);
 
-        var result = await _tutorialService.UpdateAsync(id, tutorial);
+    //     var result = await _tutorialService.UpdateAsync(id, tutorial);
 
-        if (!result.Success)
-            return BadRequest(result.Message);
+    //     if (!result.Success)
+    //         return BadRequest(result.Message);
 
-        var tutorialResource = _mapper.Map<Tutorial, TutorialResource>(result.Resource);
+    //     var tutorialResource = _mapper.Map<Tutorial, TutorialResource>(result.Resource);
 
-        return Ok(tutorialResource);
-    }
+    //     return Ok(tutorialResource);
+    // }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(int id)
-    {
-        var result = await _tutorialService.DeleteAsync(id);
+    // [HttpDelete("{id}")]
+    // public async Task<IActionResult> DeleteAsync(int id)
+    // {
+    //     var result = await _tutorialService.DeleteAsync(id);
         
-        if (!result.Success)
-            return BadRequest(result.Message);
+    //     if (!result.Success)
+    //         return BadRequest(result.Message);
 
-        var tutorialResource = _mapper.Map<Tutorial, TutorialResource>(result.Resource);
+    //     var tutorialResource = _mapper.Map<Tutorial, TutorialResource>(result.Resource);
 
-        return Ok(tutorialResource);
-    }
+    //     return Ok(tutorialResource);
+    // }
 
 }

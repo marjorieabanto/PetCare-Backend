@@ -19,13 +19,13 @@ public class CategoryTutorialsController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpGet]
-    public async Task<IEnumerable<TutorialResource>> GetAllByCategoryIdAsync(int categoryId)
-    {
-        var tutorials = await _tutorialService.ListByCategoryIdAsync(categoryId);
+    // [HttpGet]
+    // public async Task<IEnumerable<TutorialResource>> GetAllByCategoryIdAsync(int categoryId)
+    // {
+    //     var tutorials = await _tutorialService.ListByCategoryIdAsync(categoryId);
 
-        var resources = _mapper.Map<IEnumerable<Tutorial>, IEnumerable<TutorialResource>>(tutorials);
+    //     var resources = _mapper.Map<IEnumerable<Tutorial>, IEnumerable<TutorialResource>>(tutorials);
 
-        return resources;
-    }
+    //     return resources;
+    // }
 }

@@ -10,5 +10,7 @@ public class ResourceToModelProfile : Profile
     {
         CreateMap<SaveCategoryResource, Category>();
         CreateMap<SaveTutorialResource, Tutorial>();
+        CreateMap<SavePetResource, Pet>();
+
     }
 }

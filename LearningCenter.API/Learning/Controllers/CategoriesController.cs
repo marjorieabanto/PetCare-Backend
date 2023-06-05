@@ -48,34 +48,34 @@ public class CategoriesController : ControllerBase
         return Ok(categoryResource);
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(int id, [FromBody] SaveCategoryResource resource)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState.GetErrorMessages());
+    // [HttpPut("{id}")]
+    // public async Task<IActionResult> PutAsync(int id, [FromBody] SaveCategoryResource resource)
+    // {
+    //     if (!ModelState.IsValid)
+    //         return BadRequest(ModelState.GetErrorMessages());
         
-        var category = _mapper.Map<SaveCategoryResource, Category>(resource);
-        var result = await _categoryService.UpdateAsync(id, category);
+    //     var category = _mapper.Map<SaveCategoryResource, Category>(resource);
+    //     var result = await _categoryService.UpdateAsync(id, category);
         
-        if (!result.Success)
-            return BadRequest(result.Message);
+    //     if (!result.Success)
+    //         return BadRequest(result.Message);
 
-        var categoryResource = _mapper.Map<Category, CategoryResource>(result.Resource);
+    //     var categoryResource = _mapper.Map<Category, CategoryResource>(result.Resource);
 
-        return Ok(categoryResource);
-    }
+    //     return Ok(categoryResource);
+    // }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(int id)
-    {
-        var result = await _categoryService.DeleteAsync(id);
+    // [HttpDelete("{id}")]
+    // public async Task<IActionResult> DeleteAsync(int id)
+    // {
+    //     var result = await _categoryService.DeleteAsync(id);
 
-        if (!result.Success)
-            return BadRequest(result.Message);
+    //     if (!result.Success)
+    //         return BadRequest(result.Message);
         
-        var categoryResource = _mapper.Map<Category, CategoryResource>(result.Resource);
+    //     var categoryResource = _mapper.Map<Category, CategoryResource>(result.Resource);
 
-        return Ok(categoryResource);
-    }
+    //     return Ok(categoryResource);
+    // }
     
 }

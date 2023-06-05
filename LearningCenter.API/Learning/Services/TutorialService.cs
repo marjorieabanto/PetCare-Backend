@@ -23,26 +23,26 @@ public class TutorialService : ITutorialService
         return await _tutorialRepository.ListAsync();
     }
 
-    public async Task<IEnumerable<Tutorial>> ListByCategoryIdAsync(int categoryId)
-    {
-        return await _tutorialRepository.FindByCategoryIdAsync(categoryId);
-    }
+    // public async Task<IEnumerable<Tutorial>> ListByCategoryIdAsync(int categoryId)
+    // {
+    //     return await _tutorialRepository.FindByCategoryIdAsync(categoryId);
+    // }
 
     public async Task<TutorialResponse> SaveAsync(Tutorial tutorial)
     {
         // Validate CategoryId
 
-        var existingCategory = await _categoryRepository.FindByIdAsync(tutorial.CategoryId);
+        var existingCategory = await _categoryRepository.FindByIdAsync(tutorial.UserId);
 
         if (existingCategory == null)
             return new TutorialResponse("Invalid Category");
         
         // Validate Title
 
-        var existingTutorialWithTitle = await _tutorialRepository.FindByTitleAsync(tutorial.Title);
+        // var existingTutorialWithTitle = await _tutorialRepository.FindByTitleAsync(tutorial.Title);
 
-        if (existingTutorialWithTitle != null)
-            return new TutorialResponse("Tutorial title already exists.");
+        // if (existingTutorialWithTitle != null)
+        //     return new TutorialResponse("Tutorial title already exists.");
 
         try
         {
@@ -65,71 +65,71 @@ public class TutorialService : ITutorialService
         
     }
 
-    public async Task<TutorialResponse> UpdateAsync(int tutorialId, Tutorial tutorial)
-    {
-        var existingTutorial = await _tutorialRepository.FindByIdAsync(tutorialId);
+    // public async Task<TutorialResponse> UpdateAsync(int tutorialId, Tutorial tutorial)
+    // {
+    //     var existingTutorial = await _tutorialRepository.FindByIdAsync(tutorialId);
         
-        // Validate Tutorial
+    //     // Validate Tutorial
 
-        if (existingTutorial == null)
-            return new TutorialResponse("Tutorial not found.");
+    //     if (existingTutorial == null)
+    //         return new TutorialResponse("Tutorial not found.");
 
-        // Validate CategoryId
+    //     // Validate CategoryId
 
-        var existingCategory = await _categoryRepository.FindByIdAsync(tutorial.CategoryId);
+    //     var existingCategory = await _categoryRepository.FindByIdAsync(tutorial.CategoryId);
 
-        if (existingCategory == null)
-            return new TutorialResponse("Invalid Category");
+    //     if (existingCategory == null)
+    //         return new TutorialResponse("Invalid Category");
         
-        // Validate Title
+    //     // Validate Title
 
-        var existingTutorialWithTitle = await _tutorialRepository.FindByTitleAsync(tutorial.Title);
+    //     var existingTutorialWithTitle = await _tutorialRepository.FindByTitleAsync(tutorial.Title);
 
-        if (existingTutorialWithTitle != null && existingTutorialWithTitle.Id != existingTutorial.Id)
-            return new TutorialResponse("Tutorial title already exists.");
+    //     if (existingTutorialWithTitle != null && existingTutorialWithTitle.Id != existingTutorial.Id)
+    //         return new TutorialResponse("Tutorial title already exists.");
         
-        // Modify Fields
-        existingTutorial.Title = tutorial.Title;
-        existingTutorial.Description = tutorial.Description;
+    //     // Modify Fields
+    //     existingTutorial.Title = tutorial.Title;
+    //     existingTutorial.Description = tutorial.Description;
 
-        try
-        {
-            _tutorialRepository.Update(existingTutorial);
-            await _unitOfWork.CompleteAsync();
+    //     try
+    //     {
+    //         _tutorialRepository.Update(existingTutorial);
+    //         await _unitOfWork.CompleteAsync();
 
-            return new TutorialResponse(existingTutorial);
+    //         return new TutorialResponse(existingTutorial);
             
-        }
-        catch (Exception e)
-        {
-            // Error Handling
-            return new TutorialResponse($"An error occurred while updating the tutorial: {e.Message}");
-        }
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         // Error Handling
+    //         return new TutorialResponse($"An error occurred while updating the tutorial: {e.Message}");
+    //     }
 
-    }
+    // }
 
-    public async Task<TutorialResponse> DeleteAsync(int tutorialId)
-    {
-        var existingTutorial = await _tutorialRepository.FindByIdAsync(tutorialId);
+    // public async Task<TutorialResponse> DeleteAsync(int tutorialId)
+    // {
+    //     var existingTutorial = await _tutorialRepository.FindByIdAsync(tutorialId);
         
-        // Validate Tutorial
+    //     // Validate Tutorial
 
-        if (existingTutorial == null)
-            return new TutorialResponse("Tutorial not found.");
+    //     if (existingTutorial == null)
+    //         return new TutorialResponse("Tutorial not found.");
         
-        try
-        {
-            _tutorialRepository.Remove(existingTutorial);
-            await _unitOfWork.CompleteAsync();
+    //     try
+    //     {
+    //         _tutorialRepository.Remove(existingTutorial);
+    //         await _unitOfWork.CompleteAsync();
 
-            return new TutorialResponse(existingTutorial);
+    //         return new TutorialResponse(existingTutorial);
             
-        }
-        catch (Exception e)
-        {
-            // Error Handling
-            return new TutorialResponse($"An error occurred while deleting the tutorial: {e.Message}");
-        }
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         // Error Handling
+    //         return new TutorialResponse($"An error occurred while deleting the tutorial: {e.Message}");
+    //     }
 
-    }
+    // }
 }
